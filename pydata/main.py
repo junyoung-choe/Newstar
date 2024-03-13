@@ -8,6 +8,8 @@ from routers.recommend import recommend_router
 from routers.recode import recode_router
 from services.learning.news_doc2vec import makeModel
 
+import csv
+
 app = FastAPI()
 # 메타데이터를 생성한다.
 metadata_obj = MetaData()
@@ -26,6 +28,39 @@ async def make_model():
   makeModel()
   return {"message" : "makeModel"}
 
+@app.get("/keyword")
+async def save_keyword():
+  connection = next(get_db())
+  try:
+    article_table = Table("article",metadata_obj, autoload_with=engine)
+    stmt = select(article_table)
+    datas = connection.execute(stmt)
+    for data in datas:
+      print(data.article_id, data.content)
+  finally:
+    connection.close()
+  return {"message" : "saveKeyword"}
+
+@app.get("/test")
+async def test():
+  connection = next(get_db())
+  n = 0
+
+  try:
+    article_id = Table("last_article_id", metadata_obj, autoload_with=engine)
+    stmt = select(article_id)
+    datas = connection.execute(stmt)
+    for data in datas:
+      n = data[0]
+  finally:
+    connection.close()
+
+  if(n == 0) :
+    print("n is 0")
+  else :
+    print("n is not 0")
+
+  return {"message" : "test success"}
 
 # Path: category_cra
 
