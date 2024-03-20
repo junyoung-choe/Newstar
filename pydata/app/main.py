@@ -11,6 +11,7 @@ from app.routers.recode import recode_router
 from app.routers.recommend import recommend_router
 from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
+from app.routers.keywords import keyword_router
 
 app = FastAPI()
 router = APIRouter(prefix="/api/data")
@@ -41,8 +42,8 @@ async def startup():
 
 @router.get("/crawling")
 async def start_crawling():
-  do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
-  makemodel()
+  # do_crawling().to_sql(name='article', con= engine, if_exists='append', index=False)
+  # makemodel()
   article_id = es_service.last_article_id()
 
   if article_id.loc[0]['article_id'] == 0:
@@ -58,3 +59,4 @@ app.include_router(recommend_router.router)
 app.include_router(recode_router.router)
 app.include_router(search_router.router)
 app.include_router(es_router.router)
+app.include_router(keyword_router.router)

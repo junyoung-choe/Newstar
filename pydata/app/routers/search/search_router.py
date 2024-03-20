@@ -26,7 +26,7 @@ def search(keyword: Keyword):
     res = []
     index_name = 'article'
 
-    es = Elasticsearch(f"{ES['ES_BASE_URL']}")
+    es = Elasticsearch(f"{ES['host']}")
     results = es.search(index=index_name, body={'from': 0, 'size': 10, 'query': {'match': {'content': keyword}}})
     for result in results['hits']['hits']:
         article_id = result['_source']['article_id']
