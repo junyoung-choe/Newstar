@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import FastAPI, Request, APIRouter, HTTPException
 from sqlalchemy import MetaData
 from sqlalchemy.orm import Session
@@ -13,6 +15,12 @@ from app.routers.recommend.recommend_router import makemodel
 from app.routers.search import search_router
 from app.services.learning.news_summary import make_news_summary
 
+from app.logstash_test import LoggerSetup
+from app.controllers import home
+
+logger_setup = LoggerSetup();
+
+LOGGER = logging.getLogger(__name__)
 
 app = FastAPI(docs_url='/api/data/docs', redoc_url='/api/data/redoc')
 # 307 redirect 에러 해결
@@ -86,3 +94,19 @@ app.include_router(router)
 app.include_router(recommend_router.router)
 app.include_router(search_router.router)
 app.include_router(es_router.router)
+app.include_router(home.router)
+
+@app.on_event("startup")
+async def startup():
+  LOGGER.info("--- Start up App ---")
+  pass
+
+@app.on_event("shutdown")
+async def shutdown():
+  LOGGER.info("--- shutdown App ---")
+  pass
+
+@app.get('/te')
+def home():
+  return "welcome!"
+
