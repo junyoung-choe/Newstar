@@ -22,11 +22,11 @@ public class Record {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "member_id")
-  Member member;
+  private Member member;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "article_id")
-  Article article;
+  private Article article;
 
   @ColumnDefault("false")
   private Boolean likes;

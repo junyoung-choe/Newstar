@@ -1,23 +1,15 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Outlet } from "react-router-dom"
 
+import { ContainerWithoutNav, TotalContainer } from "../styles/Container"
 
-import { ContainerWithoutNav } from "../styles/Container"
-
-import Intro from "../pages/Intro"
-import ChooseKeyword from "./ChooseKeyword";
-
-function MainPage() {
+function StartPage() {
   return (
-    <>
+    <TotalContainer>
       <ContainerWithoutNav>
-        <Routes>
-          <Route path="/" element={<Intro/>} />
-          <Route path="/choose" element={<ChooseKeyword/>} />
-
-        </Routes>
+        <Outlet/>
       </ContainerWithoutNav>
-    </>
+    </TotalContainer>
   )
 }
 
-export default MainPage
+export default StartPage

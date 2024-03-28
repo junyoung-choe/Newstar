@@ -9,7 +9,8 @@ import LikeNewsCard from "../main/LikeNewsCard"
 const LikeNewsContainer = styled.div`
   width: 100%;
   overflow-x: auto;
-  padding: 15px;
+  overflow-y: hidden;
+  padding: 10px;
   position: relative;
   
 `
@@ -23,7 +24,7 @@ const LikeNewsCards = styled.div`
 export default function LikeNews() {
   const likeNews = useRecoilValue(likeDataState)
   const newsData = useRecoilValue(newsDataState)
-  console.log(newsData)
+
 
   return (
     <div>
@@ -32,7 +33,8 @@ export default function LikeNews() {
         <LikeNewsCards>
           {likeNews && likeNews.map((likeData, idx) => (
             <LikeNewsCard
-              key={`${idx}-${likeData.article_id}`} 
+              key={`${idx}-${likeData.article_id}`}
+              $background={idx % 2 === 0 ? "rgb(138, 192, 56)" : "rgb(100, 192, 86)"}
               likeData={likeData} />
           ))}
         </LikeNewsCards>

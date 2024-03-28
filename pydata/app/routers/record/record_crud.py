@@ -8,11 +8,9 @@ import pandas as pd
 from app.models import Record
 
 
-async def get_like_list(db: Session, member_id):
-    query = f"SELECT article_id FROM record WHERE member_id = {member_id} AND likes = 1"
-    like_list_df = pd.read_sql(query, con = engine)
-    # DataFrame에서 article_id 컬럼의 값을 리스트로 변환
-    like_list = like_list_df['article_id'].tolist()
+def get_like_list(db: Session, member_id):
+    like_list_query = db.query(Record.article_id).filter(Record.member_id == member_id, Record.likes == 1)
+    like_list = [record.article_id for record in like_list_query.all()]
     return like_list
 
 def get_user_view_list(db: Session, member_id) -> List[int]:

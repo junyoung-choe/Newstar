@@ -6,7 +6,7 @@ const BoxWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding: 20px 30px;
+  padding: 20px 22px;
   border-radius: 5px;
   font-size: ${(props) => props.fontSize || "1rem"};
   font-weight: 600;

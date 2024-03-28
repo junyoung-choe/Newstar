@@ -9,7 +9,7 @@ import org.springframework.data.domain.Slice;
 @Data
 @ToString
 public class ArticleResponse {
-  Long id;
+  Long article_id;
 
   private String title;
 
@@ -21,23 +21,21 @@ public class ArticleResponse {
 
   private int Scategory;
 
-  private String imageUrl;
+  private String image_url;
 
   private String content;
 
-  private String summary;
 
   public static ArticleResponse createArticleResponse(Article article) {
     ArticleResponse articleResponse = new ArticleResponse();
-    articleResponse.id = article.getId();
+    articleResponse.article_id = article.getId();
     articleResponse.title = article.getTitle();
     articleResponse.url = article.getUrl();
     articleResponse.date = article.getDate();
     articleResponse.Bcategory = article.getBcategory();
     articleResponse.Scategory = article.getScategory();
-    articleResponse.imageUrl = article.getImageUrl();
-    articleResponse.content = article.getContent();
-    articleResponse.summary = article.getSummary();
+    articleResponse.image_url = article.getImageUrl();
+    articleResponse.content = article.getSummary();
     return articleResponse;
   }
 

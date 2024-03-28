@@ -22,7 +22,7 @@ def do_crawling():
   # 현재 시간
   current_hour = datetime.now().hour - 1
   n = 0
-
+  n2 = 0
   for i in range(len(Bcategories)):
     for scategory in Scategories[i]:
       url = f"https://news.naver.com/breakingnews/section/{Bcategories[i]}/{scategory}"
@@ -69,7 +69,7 @@ def do_crawling():
             tag.decompose()
           content = article_content.get_text(" ", strip=True) if article_content else None
           # 기사 본문의 글자가 400보다 적으면 넘기기
-          if len(content) < 400:
+          if len(content) < 400 or len(content) > 2000:
             continue
 
           # 작성 날짜 추출
@@ -93,17 +93,19 @@ def do_crawling():
           if prev_content and content and prev_content[:10] == content[:10]:
             continue
 
+          # 기사의 시간이 현재 시간보다 이전이면 break
+          elif article_hour is not None and article_hour < current_hour:
+            flag = False
+            break
+
           # 기사의 시간이 현재 시간 -1 과 같으면 resultList에 추가
           if article_hour is not None and article_hour == current_hour:
             if content and len(content) > 0:
               res = {"title": title, "url": articleUrl,  "date": date, "Bcategory": Bcategories[i], "Scategory": scategory, "image_url": imageUrl, "content": content}
               resultList.append(res)
               prev_content = content  # 기사의 내용을 prev_content에 저장
-
-          # 기사의 시간이 현재 시간보다 이전이면 break
-          elif article_hour is not None and article_hour < current_hour:
-            flag = False
-            break
+              n2+=1
+              print("실제 저장횟수 : " + str(n2))
 
           # 랜덤한 시간 동안 대기
           time.sleep(random.uniform(0.1, 1.5))

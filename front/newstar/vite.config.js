@@ -13,8 +13,8 @@ export default defineConfig({
       },
       manifest: {
         name: 'react-newstar',
-        short_name: 'newstar',
-        description: 'News Recommendation',
+        short_name: '뉴스타',
+        description: '개인 맞춤형 뉴스 추천 플랫폼',
         theme_color: '#ffffff',
         icons: [
           {

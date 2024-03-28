@@ -35,8 +35,8 @@ export default function NewsHeader({ newsData, isLiked, handleLikeButtonClick })
         <NewsTags>
           <Link to={`/newstar/category/${newsData.bcategory}`}><Tag fontSize={'12px'}>
               {`# ${BigCategory[newsData.bcategory]}`}</Tag></Link>
-          <Link to={`/newstar/category/${newsData.scategory}`}><Tag fontSize={'12px'}>
-              {`# ${SmallCategory[newsData.scategory]}`}</Tag></Link>
+          {SmallCategory[newsData.scategory] && <Link to={`/newstar/category/${newsData.scategory}`}><Tag fontSize={'12px'}>
+              {`# ${SmallCategory[newsData.scategory]}`}</Tag></Link>}
         </NewsTags>
         <LikeButton 
           isLiked={isLiked}

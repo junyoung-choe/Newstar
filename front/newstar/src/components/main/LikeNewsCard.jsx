@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom"
 import { SmallCategory } from "../../state/categoryData"
 
 const LikeNewsCardWrappr = styled.div`
@@ -27,8 +28,9 @@ const LikeNewsTitle = styled.div`
 `
 
 export default function LikeNewsCard({ likeData, $background }) {
+  const navigate = useNavigate()
   return (
-    <LikeNewsCardWrappr $background={$background}>
+    <LikeNewsCardWrappr $background={$background} onClick={() => navigate(`/newstar/${likeData.id}`)}>
         <LikeNewsScate>{`# ${SmallCategory[likeData.scategory]}`}</LikeNewsScate>
         <LikeNewsTitle>{likeData.title}</LikeNewsTitle>
     </LikeNewsCardWrappr>

@@ -20,7 +20,7 @@ cd ../exec/deploy
 EXIST_BLUE=$(docker compose -p deploy-blue -f docker-compose.blue.yaml ps | grep Up)
 
 if [ -z "$EXIST_BLUE" ]; then
-    docker compose -p deploy-blue -f docker-compose.blue.yaml --env-file ./.env up -d
+    docker compose -p deploy-blue -f docker-compose.blue.yaml up -d
     BEFORE_COLOR="green"
     AFTER_COLOR="blue"
     BEFORE_SPRING_PORT=8081
@@ -30,7 +30,7 @@ if [ -z "$EXIST_BLUE" ]; then
     AFTER_REACT_PORT=3000
     AFTER_FASTAPI_PORT=8000
 else
-    docker compose -p deploy-green -f docker-compose.green.yaml --env-file ./.env up -d
+    docker compose -p deploy-green -f docker-compose.green.yaml up -d
     BEFORE_COLOR="blue"
     AFTER_COLOR="green"
     BEFORE_SPRING_PORT=8080
@@ -53,7 +53,7 @@ if [ -n "$EXIST_AFTER" ]; then
     
     echo "Completed Deploy!"
     echo "$BEFORE_COLOR server down(spring_port:${BEFORE_SPRING_PORT}, react_port:${BEFORE_REACT_PORT}, fastapi_port:${BEFORE_FASTAPI_PORT})"
-    docker compose -p deploy-${BEFORE_COLOR} -f docker-compose.${BEFORE_COLOR}.yaml --env-file ./.env down
+    docker compose -p deploy-${BEFORE_COLOR} -f docker-compose.${BEFORE_COLOR}.yaml down
 fi
 
 EXIST_NONE_IMAGES=$(docker images -f "dangling=true" -q)

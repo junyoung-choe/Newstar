@@ -13,7 +13,7 @@ import { useRecoilState } from "recoil"
 import { getRecords, getLikes } from "../api/fetch"
 
 
-const Container = styled.div`
+const MyPageContainer = styled.div`
   padding: 10px;
   
   // 직접 자식 컴포넌트들 사이에 간격을 추가
@@ -54,10 +54,10 @@ export default function MyPage() {
   },[])
 
   return (
-    <Container>
+    <MyPageContainer>
       {/* <MyCategory/> */}
       <MyNews/>
       <LikeNews/>
-    </Container>
+    </MyPageContainer>
   )
 }

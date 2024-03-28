@@ -2,10 +2,14 @@
 // 키워드로 뉴스 실시간 검색
 
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components'
 import { searchNews } from '../api/fetch';
 import SearchBar from '../components/SearchBar';
 import SearchNewsList from '../components/main/SearchNewsList';
 
+const SearchContainer = styled.div`
+  padding: 10px 20px 70px;
+`
 
 export default function Search() {
 
@@ -39,9 +43,9 @@ export default function Search() {
 
   
   return (
-    <div>
+    <SearchContainer>
       <SearchBar setKeyword={setKeyword} />
       <SearchNewsList NewsData={filteredNews} />
-    </div>
+    </SearchContainer>
   )
 }

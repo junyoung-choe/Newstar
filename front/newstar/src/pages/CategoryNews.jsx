@@ -3,13 +3,11 @@ import { useNavigate } from 'react-router-dom'
 
 import { BigCategoryData, SmallCategoryData } from '../state/categoryData'
 
-
 const CategoryNewsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 35px;
-  padding: 30px 60px;
-  /* background-color: #F5F5F5; */
+  padding: 20px 50px 90px;
 `
 
 const CategoryBox = styled.div`
@@ -18,7 +16,6 @@ const CategoryBox = styled.div`
   gap: 15px;
   justify-content: space-between;
   border-radius: 10px;
-
 `
 
 const BigCategoryBox = styled.div`
@@ -78,6 +75,27 @@ export default function CategoryNews() {
       {small.name}</SmallCategoryBox>
   )
 
+  const list102 = SmallCategoryData[102].map(small =>
+    <SmallCategoryBox
+      key={small.code} 
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
+      {small.name}</SmallCategoryBox>
+  )
+
+  const list103 = SmallCategoryData[103].map(small =>
+    <SmallCategoryBox
+      key={small.code} 
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
+      {small.name}</SmallCategoryBox>
+  )
+
+  const list104 = SmallCategoryData[104].map(small =>
+    <SmallCategoryBox
+      key={small.code} 
+      onClick={() => navigate(`/newstar/category/${small.code}`)}>
+      {small.name}</SmallCategoryBox>
+  )
+
   const list105 = SmallCategoryData[105].map(small =>
     <SmallCategoryBox
       key={small.code} 
@@ -94,6 +112,18 @@ export default function CategoryNews() {
       <CategoryBox>
         <BigCategoryBox onClick={() => navigate('/newstar/category/101')}>경제 전체</BigCategoryBox>
         {list101}
+      </CategoryBox>
+      <CategoryBox>
+        <BigCategoryBox onClick={() => navigate('/newstar/category/102')}>사회 전체</BigCategoryBox>
+        {list102}
+      </CategoryBox>
+      <CategoryBox>
+        <BigCategoryBox onClick={() => navigate('/newstar/category/103')}>생활/문화 전체</BigCategoryBox>
+        {list103}
+      </CategoryBox>
+      <CategoryBox>
+        <BigCategoryBox onClick={() => navigate('/newstar/category/104')}>세계 전체</BigCategoryBox>
+        {list104}
       </CategoryBox>
       <CategoryBox>
         <BigCategoryBox onClick={() => navigate('/newstar/category/105')}>IT/과학 전체</BigCategoryBox>

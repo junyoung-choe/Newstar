@@ -9,8 +9,6 @@ services:
         restart: always
         environment:
           TZ: Asia/Seoul
-          MYSQL_USER: ${MYSQL_USER}
-          MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     react:
         container_name: react-blue
         image: newstar_front
@@ -24,8 +22,6 @@ services:
         restart: always
         environment:
           TZ: Asia/Seoul
-          MYSQL_USER: ${MYSQL_USER}
-          MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 networks:
   default:
     name: app-net

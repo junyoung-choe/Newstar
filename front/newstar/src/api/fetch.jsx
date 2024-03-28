@@ -93,6 +93,13 @@ function getArticle(articleId, success, fail) {
     .catch(fail)
 }
 
+// 설문 답변 저장하기
+function setAnswer(data, success, fail) {
+  return axiosInstance.post(api.answer, data)
+    .then(success)
+    .catch(fail)
+}
+
 
 export {
   getNews,
@@ -105,5 +112,6 @@ export {
   getKeyword,
   getCategoryNews,
   likeNews,
-  getArticle
+  getArticle,
+  setAnswer
 }

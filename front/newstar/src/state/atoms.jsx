@@ -17,7 +17,7 @@ const recordDataState = atom({
 
 const categoryDataState = atom({
   key: "categoryState",
-  default: ""
+  default: []
 })
 
 const likeDataState = atom({

@@ -2,6 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { postRecords } from "../../api/fetch";
 
 
 // styled-components
@@ -9,6 +10,7 @@ const BoxContainer = styled.div`
   display: flex;
   flex-direction: row; 
   align-items: center; 
+  justify-content: center;
   gap: 20px;
   padding: 20px;
   cursor: pointer;
@@ -29,24 +31,32 @@ const SearchTitle = styled.h3`
 
 const SearchNewsList = ({ NewsData }) => {
   const navigate = useNavigate();
-  
-    // 리스트를 클릭하면 숏폼 url로 이동
-  const handleClick = (url) => {
-    navigate({ pathname: url });
-  };
 
+  const handleNewsClick = (articleId) => {
+    const mynews = { articleId };
+    postRecords(
+      mynews,
+      (response) => {
+        console.log("시청 기록 생성 성공", response);
+        navigate(`/newstar/${articleId}`);
+      },
+      (error) => {
+        console.log("시청 기록 생성 실패", error);
+      }
+    );
+  };
   
   return (
     <div>
       {NewsData.length > 0 ? (
         NewsData.map((newsItem) => (
-          <BoxContainer key={newsItem.article_id} onClick={() => handleClick(newsItem.url)}>
+          <BoxContainer key={newsItem.article_id} onClick={() => handleNewsClick(newsItem.article_id)}>
             <SearchNewsCardImage src={newsItem.image_url} alt="news image" />
             <SearchTitle>{newsItem.title}</SearchTitle>
           </BoxContainer>
         ))
       ) : (
-        <p>검색 결과가 없습니다.</p>
+        <BoxContainer>검색 결과가 존재하지 않습니다.</BoxContainer>
       )}
     </div>
   );

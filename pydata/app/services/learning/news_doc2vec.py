@@ -16,9 +16,14 @@ def make_model(news_df):
         # 본문 기호 제거
         text = re.sub('[-=+,#/\?:^.@*\"※~ㆍ!』‘|\(\)\[\]`\'…》\”\“\’·]', ' ', text)
         tag = row['article_id']
-        tagged_corpus_list.append(TaggedDocument(tags=[tag], words=mecab.nouns(text)))
+        text = mecab.morphs(text)
+        text.append(row['bcategory'])
+        text.append(row['scategory'])
 
-    model = doc2vec.Doc2Vec(vector_size=300, alpha=0.025, min_alpha=0.025, workers=16, window=5)
+        tagged_corpus_list.append(TaggedDocument(tags=[tag], words=text))
+
+    model = doc2vec.Doc2Vec(vector_size=300, alpha=0.025, min_alpha=0.0001, dm=1, workers=32, window=9, sample=1e-5)
+
 
     # Vocabulary 빌드
     model.build_vocab(tagged_corpus_list)

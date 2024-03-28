@@ -1,9 +1,10 @@
 // 메인 페이지 뉴스 카드
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import styled from "styled-components"
 
 import MainNewsHeader from "./MainNewsHeader"
 import MainNewsBody from "./MainNewsBody"
+import NotFoundImg from '../../assets/logo_dark.png'
 
 import { likeNews } from "../../api/fetch"
 
@@ -15,17 +16,15 @@ const MainNewsImage = styled.img`
 `
 
 const NewsContainer = styled.div`
-  height: auto;
-  max-height: 86vh;
+  margin-bottom: 80px;
   overflow-y: auto;
-  width: 100%;
   ::-webkit-scrollbar {
     display: none;
   }
 `
 
 function MainNewsCard({ newsData }) {
-  
+
   // 좋아요 상태 관리
   const [isLiked, setIsLiked] = useState(false);
 
@@ -48,14 +47,17 @@ function MainNewsCard({ newsData }) {
       }
     )
   }
+  const onErrorImg = (e) => {
+    e.target.src = NotFoundImg;
+  }
 
   return (
     <NewsContainer onDoubleClick={handleLike}>
       <MainNewsImage
         src={newsData.image_url}
         alt="news image"
+        onError={onErrorImg}
       />
-
       <MainNewsHeader
         newsData={newsData}
         isLiked={isLiked}

@@ -62,7 +62,7 @@ def get_random_articles_by_categories(db: Session, user_categories: List[int]) -
         random_articles = db.query(Article.article_id) \
             .filter(Article.bcategory == category) \
             .order_by(func.random()) \
-            .limit(2) \
+            .limit(5) \
             .all()
         # 선택된 레코드의 article_id를 article_ids 리스트에 추가
         article_ids.extend([article.article_id for article in random_articles])

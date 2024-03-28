@@ -9,7 +9,7 @@ const StyledButton = styled.button`
   padding: 8px 20px;
   font-size: 15px;
   font-weight: 600;
-  background-color: white;
+  background-color: lightgray;
   box-shadow: 2px 2px 7px 1px lightgray;
   cursor: pointer;
   &:hover {
